@@ -1,0 +1,20 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+    {% if user.is_active %}
+    <p>로그인되었습니다! {{ user.username }}님 반갑습니다.</p>
+    <p><a href="{% url 'logout' %}">로그아웃</a></p>
+    {% else %}
+    <p>You are not logged in</p>
+    <a href="{% url 'login' %}">로그인</a>
+    
+    {% endif %}
+    <hr>
+    {% for post in posts.all %}
+        <div>
+            
+            <h2><a href="{% url 'detail' post.id %}">{{post.title}}</a></h2>
+            <p>{{post.created_date}}</p>
+        </div>
+    {% endfor %}
+{% endblock %}
